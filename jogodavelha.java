@@ -53,11 +53,38 @@ public void actionPerformed(ActionEvent e) {
 *colocando funçoes vazias com returns aleatorios para o codigo nao ficar com erro
 *provavelmente colocarei outros nomes
 */
-private boolean verificarVitoria(){
-    return true;
+private boolean verificarVitoria() {
+    // verifica linhas, colunas e diagonais
+    for (int a = 0; a < 3; a++) {
+        if (botoes[a][0].getText().equals(String.valueOf(jogadorAtual)) &&
+            botoes[a][1].getText().equals(String.valueOf(jogadorAtual)) &&
+            botoes[a][2].getText().equals(String.valueOf(jogadorAtual))) {
+                return true;
+        }
+        if (botoes[0][a].getText().equals(String.valueOf(jogadorAtual)) &&
+            botoes[1][a].getText().equals(String.valueOf(jogadorAtual)) &&
+            botoes[2][a].getText().equals(String.valueOf(jogadorAtual))) {
+                return true;
+        }
+    }
+    //verifica as colunas
+    return (botoes[0][0].getText().equals(String.valueOf(jogadorAtual)) &&
+            botoes[1][1].getText().equals(String.valueOf(jogadorAtual)) &&
+            botoes[2][2].getText().equals(String.valueOf(jogadorAtual))) ||
+           (botoes[0][2].getText().equals(String.valueOf(jogadorAtual)) &&
+            botoes[1][1].getText().equals(String.valueOf(jogadorAtual)) &&
+            botoes[2][0].getText().equals(String.valueOf(jogadorAtual)));
 }
+
 private boolean tabuleiroCheio() {
-    return false;
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            if (botoes[i][j].getText().isEmpty()) {
+                return false;
+            }
+        }
+    }
+   return true;
 }    
 private void reiniciarJogo(){}
 
