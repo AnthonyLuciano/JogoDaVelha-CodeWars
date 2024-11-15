@@ -8,15 +8,25 @@ import java.awt.event.ActionListener;
 public class jogodavelha extends JFrame implements ActionListener {
     private final JButton[][] botoes = new JButton[3][3];
     //info do jogador inicial adicionada
+    //info de scoreboard adicionada
+    private int vitoriasX = 0;
+    private int vitoriasO = 0;
+    private final JLabel labelVitorias;
     private char jogadorAtual = 'X';
 
     public jogodavelha(){
         //criar a janela java
         setTitle("Jogo Da Velha");
-        setSize(300, 300);
+        setSize(300, 350); //tamanho aumentado para scoreboard
+        
+        labelVitorias = new JLabel("X: 0  O: 0", SwingConstants.CENTER);
+        labelVitorias.setFont(new Font("Arial", Font.PLAIN, 20));
+        add(labelVitorias, BorderLayout.NORTH);
+        
         //gerar os botoes no estilo do jogo
         JPanel painelBotoes = new JPanel();
         painelBotoes.setLayout(new GridLayout(3, 3));
+        
         for(int a = 0; a < 3; a++){
             for(int b = 0; b < 3; b++){
                 //comentarios vao ser menos a partir de agora
@@ -32,12 +42,19 @@ public class jogodavelha extends JFrame implements ActionListener {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
     }
+
 @Override
 public void actionPerformed(ActionEvent e) {
     JButton botaoClicado = (JButton) e.getSource();
     if (botaoClicado.getText().isEmpty()) {
         botaoClicado.setText(String.valueOf(jogadorAtual));
         if (verificarVitoria()) {
+            if (jogadorAtual == 'X') {
+                vitoriasX++;
+            } else  {
+                vitoriasO++;
+            }
+            atualizarLabelVitorias();
             JOptionPane.showMessageDialog(this, "Jogador " + jogadorAtual + " venceu!");
             reiniciarJogo();
         } else if (tabuleiroCheio()) {
@@ -49,10 +66,9 @@ public void actionPerformed(ActionEvent e) {
             }
         }
         
-/*funcoes "verificarVitoria()", "reiniciarJogo()" e "tabuleiroCheio()" ainda vao ser preparadas
-*colocando funçoes vazias com returns aleatorios para o codigo nao ficar com erro
-*provavelmente colocarei outros nomes
-*/
+/*
+ * os nomes sao os mesmos [:v]
+ */
 private boolean verificarVitoria() {
     // verifica linhas, colunas e diagonais
     for (int a = 0; a < 3; a++) {
@@ -94,7 +110,9 @@ private void reiniciarJogo(){
     }
     jogadorAtual = 'X';
 }
-
+private void atualizarLabelVitorias() {
+    labelVitorias.setText("X: " + vitoriasX + "  O: " + vitoriasO);
+}
 //main movida pro final do codigo, porque java é java.
     public static void main(String[] args) {
     new jogodavelha();
