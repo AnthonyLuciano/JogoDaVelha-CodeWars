@@ -86,7 +86,14 @@ private boolean tabuleiroCheio() {
     }
    return true;
 }    
-private void reiniciarJogo(){}
+private void reiniciarJogo(){
+    for(int a = 0; a< 3; a++){
+        for(int b = 0; b < 0; b++){
+
+        }
+    }
+    jogadorAtual = 'X';
+}
 
 //main movida pro final do codigo, porque java é java.
     public static void main(String[] args) {
