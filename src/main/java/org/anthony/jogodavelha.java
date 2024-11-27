@@ -105,8 +105,8 @@ private boolean tabuleiroCheio() {
 }    
 private void reiniciarJogo(){
     for(int a = 0; a< 3; a++){
-        for(int b = 0; b < 0; b++){
-
+        for(int b = 0; b < 3; b++){
+            botoes[a][b].setText("");
         }
     }
     jogadorAtual = 'X';
